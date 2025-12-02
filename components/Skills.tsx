@@ -217,62 +217,49 @@ function SkillsMarquee() {
     <div 
       className="relative py-8"
       style={{ 
-        width: '100vw', 
-        marginLeft: 'calc(-40vw + 50%)',
+        position: 'relative',
+        left: '50%',
+        right: '50%',
+        marginLeft: '-50vw',
+        marginRight: '-50vw',
+        width: '100vw',
         overflow: 'hidden',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: 'rgb(9, 9, 11)',
       }}
     >
-      {/* Gradient overlays - fixed to viewport edges */}
+      {/* Gradient overlays */}
       <div 
-        className="absolute left-0 top-0 bottom-0 z-10" 
+        className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none" 
         style={{ 
-          width: '120px',
-          background: 'linear-gradient(to right, rgb(9, 9, 11), transparent)'
+          width: '150px',
+          background: 'linear-gradient(to right, rgb(9, 9, 11) 0%, rgb(9, 9, 11) 20%, transparent 100%)'
         }} 
       />
       <div 
-        className="absolute right-0 top-0 bottom-0 z-10" 
+        className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none" 
         style={{ 
-          width: '120px',
-          background: 'linear-gradient(to left, rgb(9, 9, 11), transparent)'
+          width: '150px',
+          background: 'linear-gradient(to left, rgb(9, 9, 11) 0%, rgb(9, 9, 11) 20%, transparent 100%)'
         }} 
       />
 
-      {/* Scrolling wrapper - exactly centered */}
-      <div 
-        style={{ 
-          position: 'absolute',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: 'max-content',
+      {/* Scrolling content */}
+      <motion.div
+        animate={{ x: ['0%', '-50%'] }}
+        transition={{
+          duration: 60,
+          repeat: Infinity,
+          ease: 'linear',
+          repeatType: 'loop',
         }}
+        className="flex gap-6 whitespace-nowrap"
+        style={{ width: 'fit-content' }}
       >
-        <motion.div
-          animate={{ x: [0, -2800] }}
-          transition={{
-            duration: 60,
-            repeat: Infinity,
-            ease: 'linear',
-            repeatType: 'loop',
-          }}
-          className="flex gap-6 whitespace-nowrap"
-        >
-          {/* Duplicate skills 4 times for seamless infinite loop */}
-          {[...allSkills, ...allSkills, ...allSkills, ...allSkills].map((skill, index) => (
-            <SkillItem key={`${skill}-${index}`} skill={skill} />
-          ))}
-        </motion.div>
-      </div>
-
-      {/* Invisible spacer to maintain height */}
-      <div className="flex gap-6 whitespace-nowrap opacity-0 pointer-events-none">
-        {allSkills.slice(0, 5).map((skill, index) => (
-          <SkillItem key={`spacer-${index}`} skill={skill} />
+        {/* Duplicate skills 4 times for seamless infinite loop */}
+        {[...allSkills, ...allSkills, ...allSkills, ...allSkills].map((skill, index) => (
+          <SkillItem key={`${skill}-${index}`} skill={skill} />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
