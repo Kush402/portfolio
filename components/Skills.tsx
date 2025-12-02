@@ -218,9 +218,9 @@ function SkillsMarquee() {
       className="relative py-8"
       style={{ 
         position: 'relative',
-        left: '50%',
-        right: '50%',
-        marginLeft: '-50vw',
+        left: '51%',
+        right: '80%',
+        marginLeft: '-40vw',
         marginRight: '-50vw',
         width: '100vw',
         overflow: 'hidden',
